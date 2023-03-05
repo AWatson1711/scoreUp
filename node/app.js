@@ -10,9 +10,11 @@ const Game = require("./src/models/Game");
 const Stat = require("./src/models/Stat");
 const Role = require("./src/models/Role");
 const Friend = require("./src/models/Friend");
+const Media = require("./src/models/Media");
+const Game_played = require("./src/models/Game_played");
 
 const port = process.env.PORT || 3003;
-
+ 
 app.listen(port, () => {
   console.log(`Le serveur est en cours d'exécution sur le port ${port}`);
 });

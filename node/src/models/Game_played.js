@@ -1,19 +1,24 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db/db");
-const Media = require("./Media");
-const Game_played = require("./Game_played");
+const Stat = require("./Stat");
 
-const Game = db.define(
-  "Game",
+const Game_played = db.define(
+  "Game_played",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    comment: {
       type: DataTypes.STRING,
-      allowNull: false,
+      //   Si c'est null ajouter une phrase par defaut
+      allowNull: true,
+    },
+    game_name: {
+      //   Nom de la partie jouer
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
@@ -23,20 +28,12 @@ const Game = db.define(
   },
 );
 
-Game.hasMany(Media, {
+Game_played.hasMany(Stat, {
   foreignKey: {
     allowNull: false,
-    name: "game_id",
+    name: "game_played_id",
   },
   sourceKey: "id",
 });
 
-Game.hasMany(Game_played, {
-  foreignKey: {
-    allowNull: false,
-    name: "game_id",
-  },
-  sourceKey: "id",
-});
-
-module.exports = Game;
+module.exports = Game_played;

@@ -1,5 +1,8 @@
 // Importation des types de données de Sequelize
 const { DataTypes } = require("sequelize");
+const Media = require("./Media");
+const Friend = require("./Friend");
+const Game = require("./Game");
 
 // Importation de db qui contient la connexion à la base de données
 const db = require("../db/db");
@@ -45,5 +48,30 @@ const User = db.define(
     updatedAt: "updated", // Nommer le champ updatedAt "updated"
   },
 );
+
+User.hasMany(Media, {
+  foreignKey: {
+    allowNull: false,
+    name: "user_id",
+  },
+  sourceKey: "id",
+});
+
+User.hasMany(Friend, {
+  foreignKey: {
+    allowNull: false,
+    name: "user_id",
+  },
+  sourceKey: "id",
+});
+
+User.hasMany(Game, {
+  foreignKey: {
+    allowNull: false,
+    name: "user_id",
+  },
+  sourceKey: "id",
+});
+
 
 module.exports = User;
