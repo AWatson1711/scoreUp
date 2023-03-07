@@ -1,5 +1,5 @@
 // Importation de Sequelize
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 
 // Créer une instance de Sequelize en passant les informations de connexion
 const sequelize = new Sequelize("score_up", "root", "root", {
@@ -17,8 +17,8 @@ sequelize
 
 // Synchroniser les modèles de la base de données
 sequelize
-  .sync({ force: true })
+  .sync()
   .then((_) => console.log("la methode sync a réussi"))
   .catch((error) => console.error(error));
 
-module.exports = sequelize;
+export default sequelize;
