@@ -9,11 +9,12 @@ import { userProfil } from "../controllers/user/user.findOne.controller.js";
 
 const initUsersRoutes = (app, sm) => {
   const router = Router();
-  router.get("/", sm, readUser);
+  router.get("/", sm, jwtMiddleware, readUser);
   router.get("/profil", jwtMiddleware, sm, userProfil);
   router.post("/sign-up", sm, signUp);
   router.post("/sign-in", sm, signIn);
-  router.delete("/delete/:id", sm, deleteUser);
+  router.delete("/deleteadmin/:id", sm, jwtMiddleware, deleteUser.admin);
+  router.delete("/delete/:id", sm, jwtMiddleware, deleteUser.member);
   router.put("/update/:id", sm, updateUser);
   app.use("/users", router);
 };

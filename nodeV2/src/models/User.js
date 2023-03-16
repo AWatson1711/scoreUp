@@ -8,6 +8,7 @@ import Game from "./Game.js";
 import sequelize from "../db/db.js";
 import Stat from "./Stat.js";
 import Game_played from "./Game_played.js";
+import Role from "./Role.js";
 
 // On Défini un modèle pour la table User
 const User = sequelize.define(
@@ -85,6 +86,13 @@ User.hasMany(Game_played, {
     name: "user_id",
   },
   sourceKey: "id",
+});
+
+User.belongsTo(Role, {
+  foreignKey: {
+    allowNull: false,
+    name: "role_id",
+  },
 });
 
 export default User;

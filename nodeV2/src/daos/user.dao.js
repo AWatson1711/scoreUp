@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import Role from "../models/Role.js";
 
 const create = async (name, firstname, email, number, password) => {
   let result = null;
@@ -51,6 +52,17 @@ const readById = async (userId) => {
   }
 };
 
+const getRoleByUserId = async (userId) => {
+  const user = await User.findOne({
+    where: { id: userId },
+    include: Role,
+  });
+  if (user) {
+    return user.Role.role;
+  }
+  return null;
+};
+
 export const UserDAO = {
   create: create,
   findByEmail,
@@ -58,4 +70,5 @@ export const UserDAO = {
   updateById,
   readAll,
   readById,
+  getRoleByUserId,
 };
