@@ -1,10 +1,10 @@
-const { DataTypes } = require("sequelize");
-const Media = require("./Media");
-const Stat = require("./Stat");
+import { DataTypes } from "sequelize";
+import Media from "./Media.js";
+import Stat from "./Stat.js";
 
-const db = require("../db/db");
+import sequelize from "../db/db.js";
 
-const Friend = db.define(
+const Friend = sequelize.define(
   "Friend",
   {
     id: {
@@ -50,4 +50,4 @@ Friend.hasMany(Stat, {
   sourceKey: "id",
 });
 
-module.exports = Friend;
+export default Friend;

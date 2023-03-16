@@ -1,4 +1,4 @@
-import { jwtVerify } from "../utils/jwt.utils";
+import { jwtVerify } from "../utils/jwt.utils.js";
 
 // Exportation d'un middleware qui va vérifiée les tokens
 export const jwtMiddleware = (req, res, next) => {

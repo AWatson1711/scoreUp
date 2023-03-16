@@ -1,8 +1,8 @@
 // Importation de JSON Web Token
 import jwt from "jsonwebtoken";
 // Importation de la clé privée pour la vérification des tokens
-import { key } from "../config/key";
-import { stringIsFilled } from "./string.utils";
+import { key } from "../config/key.js";
+// import { stringIsFilled } from "./string.utils";
 
 // Importation de la fonction promisify d'util qui se trouvve dans Node.js
 import { promisify } from "util";

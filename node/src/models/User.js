@@ -1,14 +1,14 @@
 // Importation des types de données de Sequelize
-const { DataTypes } = require("sequelize");
-const Media = require("./Media");
-const Friend = require("./Friend");
-const Game = require("./Game");
+import { DataTypes } from "sequelize";
+import Media from "./Media.js";
+import Friend from "./Friend.js";
+import Game from "./Game.js";
 
-// Importation de db qui contient la connexion à la base de données
-const db = require("../db/db");
+// Importation de sequelize qui contient la connexion à la base de données
+import sequelize from "../db/db.js";
 
 // On Défini un modèle pour la table User
-const User = db.define(
+const User = sequelize.define(
   "User", // Nom de la table
   {
     // On Défini les champs de la table
@@ -73,5 +73,4 @@ User.hasMany(Game, {
   sourceKey: "id",
 });
 
-
-module.exports = User;
+export default User;
