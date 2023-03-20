@@ -14,8 +14,8 @@ const readOne = async (statId) => {
   try {
     const stats = await Stat.findByPk(statId);
     return stats;
-  } catch (e) {
-    console.error(`stat.dao - readOne : ${e.message}`);
+  } catch (error) {
+    console.error(`stat.dao - readOne : ${error.message}`);
     return null;
   }
 };
@@ -32,15 +32,23 @@ const create = async (victory, score, friendId, gamePlayedId) => {
 };
 
 const updateById = async (statId, victory, score) => {
-  const stat = await Stat.findByPk(statId);
-  await stat.update({ victory, score });
-  return stat;
+  try {
+    const stat = await Stat.findByPk(statId);
+    await stat.update({ victory, score });
+    return stat;
+  } catch (error) {
+    console.error(`stat.dao - updateById : ${error.message}`);
+  }
 };
 
 const deleteById = async (statId) => {
-  const stat = await Stat.findByPk(statId);
-  await stat.destroy();
-  return stat;
+  try {
+    const stat = await Stat.findByPk(statId);
+    await stat.destroy();
+    return stat;
+  } catch (error) {
+    console.error(`stat.dao - deleteById : ${error.message}`);
+  }
 };
 
 export const StatDAO = {

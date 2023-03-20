@@ -7,37 +7,48 @@ const create = async (name, firstname, email, number, password) => {
   try {
     result = User.create(name, firstname, email, number, password);
   } catch (error) {
-    console.error(error.message);
-    result.json(error.message);
+    console.error(`User.dao - create : ${error.message}`);
   }
   return result;
 };
 
 const findByEmail = async (email) => {
-  const emailUser = await User.findOne({ where: { email: email } });
-  return emailUser;
+  try {
+    const emailUser = await User.findOne({ where: { email: email } });
+    return emailUser;
+  } catch (error) {
+    console.error(`User.dao - findByEmail : ${error.message}`);
+  }
 };
 
 const deleteById = async (userId) => {
-  const user = await User.findByPk(userId);
-  await user.destroy();
-  return user;
+  try {
+    const user = await User.findByPk(userId);
+    await user.destroy();
+    return user;
+  } catch (error) {
+    console.error(`User.dao - deleteById : ${error.message}`);
+  }
 };
 
 const updateById = async (userId, name, firstname, number, email, password) => {
-  const user = await User.findByPk(userId);
-  const hash = await bcrypt.hash(password, 10).then((hash) => {
-    user.update({ name, firstname, number, email, password: hash });
-  });
-  return user;
+  try {
+    const user = await User.findByPk(userId);
+    const hash = await bcrypt.hash(password, 10).then((hash) => {
+      user.update({ name, firstname, number, email, password: hash });
+    });
+    return user;
+  } catch (error) {
+    console.error(`User.dao - updateById : ${error.message}`);
+  }
 };
 
 const readAll = async () => {
   try {
     const users = await User.findAll();
     return users;
-  } catch (e) {
-    console.error(`user.dao - readAll : ${e.message}`);
+  } catch (error) {
+    console.error(`user.dao - readAll : ${error.message}`);
     return null;
   }
 };
@@ -46,21 +57,25 @@ const readById = async (userId) => {
   try {
     const user = await User.findByPk(userId);
     return user;
-  } catch (e) {
-    console.error(`user.dao - readById : ${e.message}`);
+  } catch (error) {
+    console.error(`user.dao - readById : ${error.message}`);
     return null;
   }
 };
 
 const getRoleByUserId = async (userId) => {
-  const user = await User.findOne({
-    where: { id: userId },
-    include: Role,
-  });
-  if (user) {
-    return user.Role.role;
+  try {
+    const user = await User.findOne({
+      where: { id: userId },
+      include: Role,
+    });
+    if (user) {
+      return user.Role.role;
+    }
+  } catch (error) {
+    console.error(`user.dao - getRoleByUserId : ${error.message}`);
+    return null;
   }
-  return null;
 };
 
 export const UserDAO = {

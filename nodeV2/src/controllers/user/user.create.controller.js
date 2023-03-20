@@ -13,7 +13,7 @@ export const signUp = async (req, res) => {
     const number = req.body.number;
     const firstname = req.body.firstname;
 
-    await UserDAO.findByEmail(email).then((element) => {
+    const user = UserDAO.findByEmail(email).then((element) => {
       if (element) {
         return res.status(409).json({ message: "Cette email est déjà pris" });
       }

@@ -4,7 +4,7 @@ import { emailIsValid } from "../../utils/regex.utils.js";
 export const addFriends = async (req, res) => {
   const { userId, name, email, number } = req.body;
   try {
-    await FriendDAO.findByEmail(email).then((element) => {
+    FriendDAO.findByEmail(email).then((element) => {
       if (element) {
         return res.status(409).json({ message: "Cette email est déjà utlisé" });
       }

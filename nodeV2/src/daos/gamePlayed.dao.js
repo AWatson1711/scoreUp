@@ -23,22 +23,30 @@ const readOne = async (gamePlayedId) => {
   try {
     const gamePlayed = await Game_played.findByPk(gamePlayedId);
     return gamePlayed;
-  } catch (e) {
-    console.error(`gamePlayed.dao - readAll : ${e.message}`);
+  } catch (error) {
+    console.error(`gamePlayed.dao - readOne : ${error.message}`);
     return null;
   }
 };
 
 const updateById = async (gamePlayedId, comment, gameName) => {
-  const gamePlayed = await Game_played.findByPk(gamePlayedId);
-  await gamePlayed.update({ comment, gameName });
-  return gamePlayed;
+  try {
+    const gamePlayed = await Game_played.findByPk(gamePlayedId);
+    await gamePlayed.update({ comment, gameName });
+    return gamePlayed;
+  } catch (error) {
+    console.error(`gamePlayed.dao - updateById : ${error.message}`);
+  }
 };
 
 const deleteById = async (gamePlayedId) => {
-  const gamePlayed = await Game_played.findByPk(gamePlayedId);
-  await gamePlayed.destroy();
-  return gamePlayed;
+  try {
+    const gamePlayed = await Game_played.findByPk(gamePlayedId);
+    await gamePlayed.destroy();
+    return gamePlayed;
+  } catch (error) {
+    console.error(`gamePlayed.dao - deleteById : ${error.message}`);
+  }
 };
 
 export const GamePlayedDAO = {

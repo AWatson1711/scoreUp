@@ -1,0 +1,20 @@
+button{
+    all: unset;
+    margin-left: .7rem;
+    font-size: 1.2rem;
+    &.login{
+        &:hover{
+            color: var(--accent-color);
+        }
+    }
+    &.signUp{
+        border: 1px solid var(--accent-color);
+        color: var(--secondary-color);
+        background-color: var(--accent-color);
+        border-radius: 5rem;
+        padding: .5rem 1rem;
+        &:hover{
+            opacity: .7;
+        }
+    }
+}

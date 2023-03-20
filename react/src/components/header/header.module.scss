@@ -1,0 +1,28 @@
+@use "../../assets/css/variables";
+
+header{
+    background-color: transparent;
+    border-bottom: 1px solid var(--primary-color);
+    padding:0 0.5rem;
+    &>div{
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    & h1{
+        margin: 0;
+        padding: 0;
+        color:var(--primary-color);
+    }
+    & a{
+        text-decoration: none;
+        color:var(--third-color);
+    }
+}
+    }
+    
+.container{
+  max-width: 1400px;
+}
+

@@ -5,47 +5,58 @@ const create = async (name, email, number, userId) => {
   try {
     result = Friend.create(name, email, number);
   } catch (error) {
-    console.error(error.message);
-    result.json(error.message);
+    console.error(`friend.dao - readAll : ${error.message}`);
   }
   return result;
 };
 
 const findByEmail = async (email) => {
-  const emailUser = await Friend.findOne({ where: { email: email } });
-  return emailUser;
+  try {
+    const emailUser = await Friend.findOne({ where: { email: email } });
+    return emailUser;
+  } catch (error) {
+    console.error(`friend.dao - readAll : ${error.message}`);
+  }
 };
 
 const readAll = async (user_id) => {
   try {
     const friends = await Friend.findAll({ where: { user_id } });
     return friends;
-  } catch (e) {
-    console.error(`friend.dao - readAll : ${e.message}`);
+  } catch (error) {
+    console.error(`friend.dao - readAll : ${error.message}`);
     return null;
   }
 };
 
 const updateById = async (friendId, name, email, number) => {
-  const friend = await Friend.findByPk(friendId);
-  await friend.update({ name, email, number });
-  return friend;
+  try {
+    const friend = await Friend.findByPk(friendId);
+    await friend.update({ name, email, number });
+    return friend;
+  } catch (error) {
+    console.error(`friend.dao - updateById : ${error.message}`);
+  }
 };
 
 const readOne = async (friendId) => {
   try {
     const friends = await Friend.findByPk(friendId);
     return friends;
-  } catch (e) {
-    console.error(`friend.dao - readOne : ${e.message}`);
+  } catch (error) {
+    console.error(`friend.dao - readOne : ${error.message}`);
     return null;
   }
 };
 
 const deleteById = async (friendId) => {
-  const friend = await Friend.findByPk(friendId);
-  await friend.destroy();
-  return friend;
+  try {
+    const friend = await Friend.findByPk(friendId);
+    await friend.destroy();
+    return friend;
+  } catch (error) {
+    console.error(`friend.dao - readOne : ${error.message}`);
+  }
 };
 
 export const FriendDAO = {
