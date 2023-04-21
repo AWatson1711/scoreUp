@@ -25,7 +25,7 @@ const Game = sequelize.define(
 
 Game.hasMany(Media, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "game_id",
   },
   sourceKey: "id",
@@ -33,7 +33,7 @@ Game.hasMany(Media, {
 
 Game.hasMany(Game_played, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "game_id",
   },
   sourceKey: "id",

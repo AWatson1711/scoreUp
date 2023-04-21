@@ -4,6 +4,7 @@ import { sanitizeMiddleware } from "../middlewares/sanitize.js";
 import initFriendsRoutes from "./friend.routes.js";
 import initStatsRoutes from "./stat.routes.js";
 import initGamesPlayedRoutes from "./gamePlayed.routes.js";
+import initMediaRoutes from "./media.routes.js";
 
 const initRoutes = (app) => {
   initUsersRoutes(app, sanitizeMiddleware);
@@ -11,6 +12,7 @@ const initRoutes = (app) => {
   initFriendsRoutes(app, sanitizeMiddleware);
   initStatsRoutes(app, sanitizeMiddleware);
   initGamesPlayedRoutes(app, sanitizeMiddleware);
+  initMediaRoutes(app, sanitizeMiddleware);
 };
 
 export default initRoutes;

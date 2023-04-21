@@ -10,7 +10,7 @@ const initGamesPlayedRoutes = (app, sm) => {
   const router = Router();
   router.get("/", sm, jwtMiddleware, readGamePlayed);
   router.get("/:id", sm, jwtMiddleware, readOneGamePlayed);
-  router.post("/addgameplayed", sm, jwtMiddleware, createGamePlayed);
+  router.post("/create", sm, jwtMiddleware, createGamePlayed);
   router.put("/update/:id", sm, jwtMiddleware, updateGamePlayed);
   router.delete("/delete/:id", sm, jwtMiddleware, deleteGamePlayed);
   app.use("/gamesplayed", router);

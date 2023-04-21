@@ -1,9 +1,7 @@
-@use "../../assets/css/variables";
-
 header{
-    background-color: transparent;
+    background-color: var(--primary-color);
     border-bottom: 1px solid var(--primary-color);
-    padding:0 0.5rem;
+    padding:1rem 0;
     &>div{
     margin: 0 auto;
     display: flex;
@@ -13,16 +11,10 @@ header{
     & h1{
         margin: 0;
         padding: 0;
-        color:var(--primary-color);
     }
     & a{
         text-decoration: none;
-        color:var(--third-color);
+        color:var(--secondary-color);
     }
 }
     }
-    
-.container{
-  max-width: 1400px;
-}
-

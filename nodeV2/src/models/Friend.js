@@ -34,7 +34,7 @@ const Friend = sequelize.define(
 );
 Friend.hasMany(Media, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "friend_id",
   },
   sourceKey: "id",
@@ -42,7 +42,7 @@ Friend.hasMany(Media, {
 
 Friend.hasMany(Stat, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "friend_id",
   },
   sourceKey: "id",
@@ -50,7 +50,7 @@ Friend.hasMany(Stat, {
 
 Friend.hasMany(Game_played, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "friend_id",
   },
   sourceKey: "id",

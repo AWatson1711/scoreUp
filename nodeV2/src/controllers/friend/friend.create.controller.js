@@ -32,3 +32,4 @@ export const addFriends = async (req, res) => {
     res.json(e.message);
   }
 };
+

@@ -1,0 +1,33 @@
+.title{
+    font-size: var(--font-size-big);
+}
+
+.subTitle{
+    font-size: var(--font-size-big);
+    margin: 2rem 0;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.btnSignUp{
+    width: 80%;
+    margin: 0 auto;
+    display: block;
+    background-color: var(--accent-color);
+    color: var(--secondary-color);
+    text-align: center;
+    border-radius: 1.5rem;
+    height: 4rem;
+    &:hover{
+        opacity: .7;
+    }
+}
+
+.container{
+    max-width: 730px;
+    margin: 0 auto;
+    min-height:85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

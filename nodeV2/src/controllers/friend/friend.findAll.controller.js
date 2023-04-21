@@ -6,5 +6,5 @@ export const readFriends = async (req, res) => {
   if (!friends) {
     return res.status(400).json({ message: `can't retrieve friends` });
   }
-  res.status(200).json({ friends });
+  res.status(200).json({ friends }); 
 };

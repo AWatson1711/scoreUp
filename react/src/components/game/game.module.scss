@@ -1,0 +1,42 @@
+.gameListContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 3rem;
+  }
+  
+  .gameList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .gameCard {
+    width: 30rem;
+    margin-bottom: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+    &:hover{
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    & img{
+        width: 100%;
+        height: 20rem;
+        object-fit: cover;
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+
+    & h4 {
+        margin: 2rem 1.5rem;
+        font-size: 2.4rem;
+        font-weight: 700;
+        color: #222;
+    }
+
+    & p {
+        margin: 2rem 1.5rem;
+        font-size: 1.6rem;
+        color: #555;
+      }
+    }

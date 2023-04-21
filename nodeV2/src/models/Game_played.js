@@ -30,7 +30,7 @@ const Game_played = sequelize.define(
 
 Game_played.hasMany(Stat, {
   foreignKey: {
-    allowNull: false,
+    allowNull: true,
     name: "game_played_id",
   },
   sourceKey: "id",

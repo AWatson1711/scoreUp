@@ -10,7 +10,7 @@ const initFriendsRoutes = (app, sm) => {
   const router = Router();
   router.get("/", sm, jwtMiddleware, readFriends);
   router.get("/:id", sm, jwtMiddleware, readOneFriends);
-  router.post("/addfriend", sm, jwtMiddleware, addFriends);
+  router.post("/create", sm, jwtMiddleware, addFriends);
   router.put("/update/:id", sm, jwtMiddleware, updateFriend);
   router.delete("/delete/:id", sm, jwtMiddleware, deleteFriend);
   app.use("/friends", router);

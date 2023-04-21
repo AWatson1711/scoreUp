@@ -9,7 +9,7 @@ const create = async (name, email, number, userId) => {
   }
   return result;
 };
-
+ 
 const findByEmail = async (email) => {
   try {
     const emailUser = await Friend.findOne({ where: { email: email } });

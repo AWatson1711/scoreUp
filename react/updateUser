@@ -1,0 +1,51 @@
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../store/userSlice";
+
+const Profile = () => {
+  const dispatch = useDispatch();
+  const { name, firstname, email, number } = useSelector((state) => state.user);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // On récupère les valeurs des champs du formulaire
+    const {
+      name: newName,
+      firstname: newFirstname,
+      email: newEmail,
+      number: newNumber,
+    } = event.target.elements;
+    // On met à jour les informations de l'utilisateur dans le store Redux
+    dispatch(
+      updateUser({
+        name: newName.value,
+        firstname: newFirstname.value,
+        email: newEmail.value,
+        number: newNumber.value,
+      }),
+    );
+  };
+
+  return (
+    <div>
+      <h1>Profile</h1>
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:</label>
+        <input type="text" name="name" defaultValue={name} />
+        <br />
+        <label htmlFor="firstname">Firstname:</label>
+        <input type="text" name="firstname" defaultValue={firstname} />
+        <br />
+        <label htmlFor="email">Email:</label>
+        <input type="email" name="email" defaultValue={email} />
+        <br />
+        <label htmlFor="number">Number:</label>
+        <input type="text" name="number" defaultValue={number} />
+        <br />
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  );
+};
+
+export default Profile;

@@ -6,7 +6,7 @@ import mc from "./header.module.scss";
 const Header = () => {
   return (
     <header>
-      <div className={mc.container}>
+      <div className="container">
         <h1>
           <NavLink to="/">ScoreUp</NavLink>
         </h1>
