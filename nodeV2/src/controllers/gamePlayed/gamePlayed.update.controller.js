@@ -5,9 +5,9 @@ export const updateGamePlayed = async (req, res) => {
     const gamePlayedId = parseInt(req.params.id);
     const { comment, gameName, userId } = req.body;
 
-    if (userId && userId !== GamePlayedDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== GamePlayedDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const gamePlayed = await GamePlayedDAO.updateById(
       gamePlayedId,
       comment,

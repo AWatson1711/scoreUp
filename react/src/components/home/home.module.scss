@@ -1,68 +1,133 @@
 .title{
-    font-size: var(--font-size-huge);
+    font-size: 3.9rem;
+    line-height: 4.5rem;
+
+    @media screen and (min-width:760px){
+      font-size: 5.4rem;
+      line-height: 5rem;
+    }
+    
+    @media screen and (min-width:1100px){
+        line-height: 6rem;
+      }
+    
 }
 
 .subTitle{
     font-size: var(--font-size-big);
+    line-height: 3rem;
+    @media screen and (min-width:760px){
+        font-size: 3rem;
+        line-height: 4rem;
+      }
 
+      @media screen and (min-width:1100px){
+        line-height: 5rem;
+      }
 }
 
 main{
-    min-height:85vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    @media screen and (min-width:1100px){
+        flex-direction: row;
+        align-items: center;
+        min-height: 100%;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
 }
  
 .btnHome{
     font-size: var(--font-size-big);
     padding: 1rem 2rem;
-}
-
-.title, .subTitle, .btnHome {
-    margin: 3rem 0;
-}
-
-.gamePlayedCard {
-    width: 20rem;
-    margin: 3rem auto;
-    border-radius: 1rem;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-in-out;
-    padding: 1rem;
-    &:hover{
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
-    & img{
-        width: 100%;
-        height: 10rem;
-        object-fit: cover;
-        border-top-left-radius: 1rem;
-        border-top-right-radius: 1rem;
-    }
-
-    & h4 {
-        margin: 1.5rem;
-        font-size: 2.4rem;
-        font-weight: 700;
-        color: #222;
-    }
-
-    & p {
-        margin: 1rem 1.5rem;
-        font-size: 1.6rem;
-        color: #555;
+    border-right: none;
+    @media screen and (min-width:760px){
+        font-size: 3.5rem;
       }
-    }
+}
 
-    .table{
-        border: 1px solid black;
-        border-collapse: collapse;
-        margin: 2rem auto;
-        & th {
-            border:1px solid black;
+.title, .subTitle {
+    margin-top: 1.5rem;
+    margin-bottom: 4.5rem;
+}
+
+
+    .imageContainer{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        justify-content: center;
+
+        @media screen and (min-width:1100px){
+           margin-top: 6rem;
+          }
+        .boxImage{
+            width: 30%;
+            height: 10rem;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0px 27px 42px -21px var(--primary-color);
+            border-radius: .7rem .7rem .7rem .7rem;
+            overflow: hidden;
+            margin: .5rem;
+
+            @media screen and (min-width:760px){
+                height: 20rem;
+            }
+
         }
-        & td {
-            border: 1px solid black;
+        & img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
     }
+.redText{
+    color: var(--primary-color);
+}
+
+.btnContainer{
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.table {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid green;
+
+  & tr{
+    &:hover{
+        opacity: 0.5;
+    }
+  }
+
+
+  & td {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    width: calc(100% / 4);
+    /* Remplacer le 6 par le nombre de colonnes de votre tableau */
+  }
+}
+
+
+
+.tableContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+    width: 100%;
+
+    & a{
+        width: 100%;
+    }
+}
+
+.w100{
+    width: 100%;
+}

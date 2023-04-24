@@ -1,4 +1,4 @@
-import Game_played from "../models/Game_played.js";
+import { Game_played, Stat } from "../utils/gamePlayedStat.js";
 
 const readAll = async (user_id) => {
   try {
@@ -21,7 +21,18 @@ const create = async (comment, gameName, friendId, gameId, userId) => {
 
 const readOne = async (gamePlayedId) => {
   try {
-    const gamePlayed = await Game_played.findByPk(gamePlayedId);
+    const gamePlayed = await Game_played.findByPk(gamePlayedId, {
+      include: [
+        {
+          model: Stat,
+          as: "stats",
+        },
+        {
+          model: Friend,
+          as: "friends",
+        },
+      ],
+    });
     return gamePlayed;
   } catch (error) {
     console.error(`gamePlayed.dao - readOne : ${error.message}`);
@@ -48,6 +59,21 @@ const deleteById = async (gamePlayedId) => {
     console.error(`gamePlayed.dao - deleteById : ${error.message}`);
   }
 };
+const findStat = async (gamePlayedId) => {
+  let gamePlayed = null;
+  try {
+    gamePlayed = await Game_played.findAll({
+      where: { id: gamePlayedId },
+      include: {
+        model: Stat,
+      },
+    });
+    return gamePlayed;
+  } catch (error) {
+    console.error(`gamePlayed.dao - findStat : ${error.message}`);
+    return null;
+  }
+};
 
 export const GamePlayedDAO = {
   readAll,
@@ -55,4 +81,5 @@ export const GamePlayedDAO = {
   readOne,
   updateById,
   deleteById,
+  findStat,
 };

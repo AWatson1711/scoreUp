@@ -6,9 +6,9 @@ export const readOneMedia = async (req, res) => {
   const userId = req.body.userId;
 
   try {
-    if (userId && userId !== MediaDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== MediaDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const media = await MediaDAO.readOne(mediaId);
 
     if (!media) {

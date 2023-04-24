@@ -4,9 +4,9 @@ export const deleteGame = async (req, res) => {
   const gameId = parseInt(req.params.id);
   const userId = req.body.userId;
   try {
-    if (userId && userId !== GameDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== GameDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const game = await GameDAO.deleteById(gameId);
 
     if (game) {

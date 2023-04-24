@@ -10,7 +10,7 @@ const initStatsRoutes = (app, sm) => {
   const router = Router();
   router.get("/", sm, jwtMiddleware, readStat);
   router.get("/:id", sm, jwtMiddleware, readOneStat);
-  router.post("/addstat", sm, jwtMiddleware, createStat);
+  router.post("/create", sm, jwtMiddleware, createStat);
   router.put("/update/:id", sm, jwtMiddleware, updateStat);
   router.delete("/delete/:id", sm, jwtMiddleware, deleteStat);
   app.use("/stats", router);

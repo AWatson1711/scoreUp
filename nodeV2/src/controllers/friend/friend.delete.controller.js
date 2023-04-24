@@ -4,9 +4,9 @@ export const deleteFriend = async (req, res) => {
   const friendId = parseInt(req.params.id);
   const userId = req.body.userId;
   try {
-    if (userId && userId !== FriendDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== FriendDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const friend = await FriendDAO.deleteById(friendId);
 
     if (friend) {

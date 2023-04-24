@@ -5,9 +5,9 @@ export const updateStat = async (req, res) => {
     const statId = parseInt(req.params.id);
     const { victory, score, userId } = req.body;
 
-    if (userId && userId !== StatDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== StatDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const stat = await StatDAO.updateById(statId, victory, score);
 
     if (statId) {

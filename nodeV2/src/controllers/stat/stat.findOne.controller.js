@@ -4,9 +4,9 @@ export const readOneStat = async (req, res) => {
   const statId = parseInt(req.params.id);
   const userId = req.body.userId;
   try {
-    if (userId && userId !== StatDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== StatDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const stats = await StatDAO.readOne(statId);
 
     if (!stats)

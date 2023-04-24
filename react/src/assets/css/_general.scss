@@ -22,13 +22,14 @@ li{
 
 a{
     text-decoration: none;
-    color: #333;
+    color: var(--secondary-color);
 }
 
 body{
     font-family: var(--font-family);
     font-size: 1.6rem;
-    color: #333;
+    color: var(--secondary-color);
+    background-color: #010101
 }
 
 img{

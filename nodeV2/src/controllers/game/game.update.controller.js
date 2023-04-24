@@ -6,9 +6,9 @@ export const updateGame = async (req, res) => {
     const userId = req.body.userId;
     const name = req.body.name;
 
-    if (userId && userId !== GameDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userId && userId !== GameDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const game = await GameDAO.updateById(gameId, name);
 
     if (gameId) {

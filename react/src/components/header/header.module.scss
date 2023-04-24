@@ -1,13 +1,13 @@
 header{
-    background-color: var(--primary-color);
-    border-bottom: 1px solid var(--primary-color);
-    padding:1rem 0;
-    &>div{
+background-color: transparent;
+border-bottom: 1px solid var(--secondary-color);
+padding:1rem 0;
+&>div{
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-   
+
     & h1{
         margin: 0;
         padding: 0;
@@ -16,5 +16,10 @@ header{
         text-decoration: none;
         color:var(--secondary-color);
     }
-}
     }
+
+    & .logo{
+        width: 40%;
+        height: 10rem;
+    }
+}

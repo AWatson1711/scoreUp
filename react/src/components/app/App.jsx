@@ -10,6 +10,7 @@ import Friends from "../friends/Friends";
 import Game from "../game/Game";
 import Profile from "../profile/Profile";
 import Friend from "../friends/Friend";
+import GamePlayed from "../gamePlayed/GamePlayed";
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path="/profile/:id" element={<Profile />} />
         <Route path="/games" element={<Games />} />
         <Route path="/game/:id" element={<Game />} />
-        <Route path="/gamesPlayed/:id" element={<Game />} />
+        <Route path="/gamesPlayed/:id" element={<GamePlayed />} />
         <Route path="/friends" element={<Friends />} />
         <Route path="/friends/:id" element={<Friend />} />
         <Route path="/error404" element={<Error404 />} />

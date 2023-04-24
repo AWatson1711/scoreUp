@@ -2,7 +2,7 @@ import { getRequest, postRequest } from "../../api/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getItem, setItem } from "../../utils/storage.utils";
 
-const token = getItem("token");
+
 
 export const signUp = (redirect, form) => async (dispatch, getState) => {
   const loading = getState().user.loading;
@@ -39,6 +39,7 @@ export const signIn = (redirect, form) => async (dispatch, getState) => {
 export const getOneUser = createAsyncThunk(
   "users/getOne",
   async (_, userId, thunkApi) => {
+    const token = getItem("token");
     const { fulfillWithValue, rejectWithValue } = thunkApi;
     const { status, result, error } = await getRequest(
       `/users/${userId}`,

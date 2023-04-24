@@ -26,3 +26,13 @@ const Stat = sequelize.define(
 );
 
 export default Stat;
+
+// import Game_played from "./Game_played.js";
+
+// Game_played.hasMany(Stat, {
+//   foreignKey: {
+//     allowNull: true,
+//     name: "game_played_id",
+//   },
+//   sourceKey: "id",
+// });

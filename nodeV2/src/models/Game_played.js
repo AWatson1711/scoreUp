@@ -27,13 +27,14 @@ const Game_played = sequelize.define(
     updatedAt: "updated",
   },
 );
-
-Game_played.hasMany(Stat, {
-  foreignKey: {
-    allowNull: true,
-    name: "game_played_id",
-  },
-  sourceKey: "id",
-});
-
 export default Game_played;
+
+// Game_played.hasMany(Stat, {
+//   foreignKey: {
+//     allowNull: true,
+//     name: "game_played_id",
+//   },
+//   sourceKey: "id",
+// });
+
+

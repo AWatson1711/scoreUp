@@ -6,16 +6,18 @@ button{
 }
 
 .login{
+    border-right: 1px solid var(--secondary-color);
+    padding-right: .8rem;
     &:hover{
-        color: var(--accent-color);
+        color: var(--primary-color);
     }
 }
  .signUp{
-    border: 1px solid var(--accent-color);
-    color: var(--secondary-color);
-    background-color: var(--accent-color);
+    margin-left: .8rem;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
     border-radius: 5rem;
-    padding: .5rem 1rem;
+    padding: 1rem 1.5rem;
     &:hover{
         opacity: .7;
     }
