@@ -36,10 +36,9 @@ const putRequest = async (url, body = {}, token = null) => {
   return await request(url, config);
 };
 
-const deleteRequest = async (url, body = {}, token = null) => {
+const deleteRequest = async (url, token = null) => {
   const config = {
     method: "DELETE",
-    body: JSON.stringify(body),
     headers: { "Content-type": "application/json; charset=UTF-8" },
   };
 

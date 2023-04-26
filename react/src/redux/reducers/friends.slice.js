@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getRequest, postRequest } from "../../api/api";
+import { getRequest, postRequest, putRequest } from "../../api/api";
 import { getItem } from "../../utils/storage.utils";
 
 const token = getItem("token");
@@ -24,7 +24,6 @@ export const createFriend = createAsyncThunk(
       form,
       token,
     );
-    console.log(result);
     return error
       ? rejectWithValue(
           `Cannot create game - Error status ${status} - ${error}`,
@@ -43,6 +42,24 @@ export const getOneFriend = createAsyncThunk(
     );
     return error
       ? rejectWithValue(`Cannot get friend - Error status ${status} - ${error}`)
+      : fulfillWithValue(result);
+  },
+);
+
+export const modifyFriend = createAsyncThunk(
+  "friends/modifyFriend",
+  async ({ friendId, name, email }, thunkApi) => {
+    console.log(friendId);
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    const { status, result, error } = await putRequest(
+      `/friends/update/${friendId}`,
+      { name, email },
+      token,
+    );
+    return error
+      ? rejectWithValue(
+          `Cannot get friends - Error status ${status} - ${error}`,
+        )
       : fulfillWithValue(result);
   },
 );
@@ -72,10 +89,11 @@ const friendSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getFriends.fulfilled, (state, action) => {
+        console.log(action.payload.friends);
         return {
           ...state,
           loading: false,
-          friends: action.payload.friends,
+          friends: [...action.payload.friends],
         };
       })
       .addCase(getFriends.rejected, (state, action) => {
@@ -97,13 +115,33 @@ const friendSlice = createSlice({
         return {
           ...state,
           loading: false,
-          friends: [...action.payload.friends],
+          friends: action.payload.friends,
         };
       })
       .addCase(getOneFriend.rejected, (state, action) => {
         return { ...state, loading: false, error: action.payload };
       })
       .addCase(getOneFriend.pending, (state, action) => {
+        return { ...state, loading: true };
+      })
+      .addCase(modifyFriend.fulfilled, (state, action) => {
+        const updatedFriend = action.payload.friend;
+        const updatedFriends = Array.isArray(state.friends)
+          ? state.friends.map((f) =>
+              f.id === updatedFriend.id ? updatedFriend : f,
+            )
+          : [];
+        return {
+          ...state,
+          loading: false,
+          friends: updatedFriends,
+        };
+      })
+
+      .addCase(modifyFriend.rejected, (state, action) => {
+        return { ...state, loading: false, error: action.payload };
+      })
+      .addCase(modifyFriend.pending, (state, action) => {
         return { ...state, loading: true };
       });
   },

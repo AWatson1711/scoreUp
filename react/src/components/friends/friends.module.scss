@@ -1,0 +1,101 @@
+.friendContainer{
+    display: flex;
+    & .friendInfos{
+        margin-left: 3rem;
+    }
+}
+
+.friendHeader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5rem;
+
+    & .friendAvatar{
+        height: 10rem;
+        width: 10rem;
+        border-radius: 50%;
+        border: 1px solid var(--primary-color);
+        margin-right: 3rem;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    & .modalContent {
+      position: relative;
+      z-index: 1;
+      max-width: 500px;
+      background: #222;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+  
+      &title {
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      & fieldset{
+        margin: 2rem 0;
+        border-radius: .5rem;
+    }
+
+    & legend{
+        color: var(--primary-color);
+        padding: 0 1rem;
+        margin:0 .5rem;
+    }
+
+  
+      & .cancelButton {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #ccc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+  
+        &:hover {
+          background: #999;
+        }
+      }
+    }
+  }
+
+  .table {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid green;
+    margin-top: 3rem;
+  
+    & tr{
+      &:hover{
+          opacity: 0.5;
+      }
+    }
+  
+  
+    & td {
+      border: 1px solid #ddd;
+      padding: 1rem;
+      width: calc(100% / 4);
+      /* Remplacer le 6 par le nombre de colonnes de votre tableau */
+    }
+  }

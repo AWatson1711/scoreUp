@@ -3,31 +3,61 @@
 }
 
 .subTitle{
-    font-size: var(--font-size-big);
+    font-size: var(--font-size-medium);
     margin: 2rem 0;
-    width: 80%;
-    margin: 0 auto;
 }
 
 .btnSignUp{
-    width: 80%;
-    margin: 0 auto;
     display: block;
-    background-color: var(--accent-color);
-    color: var(--secondary-color);
+    width: 84%;
     text-align: center;
-    border-radius: 1.5rem;
-    height: 4rem;
+    padding: 1rem 2rem;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    // border-radius: 5rem;
     &:hover{
         opacity: .7;
     }
 }
 
 .container{
-    max-width: 730px;
     margin: 0 auto;
-    min-height:85vh;
+
+}
+
+.formContainer{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-around;
+    width: 100%;
+
+    & fieldset{
+        margin: 2rem 0;
+        border-radius: .5rem;
+    }
+
+    & legend{
+        color: var(--primary-color);
+        padding: 0 1rem;
+        margin:0 .5rem;
+    }
+
+    & a{
+        display: block;
+        margin-top: 2rem;
+        & span{
+            text-decoration: underline;
+            font-weight: bold;
+        }
+       
+      
+    } 
+}
+
+.imageContainer{
+    width: 45%;
+    display: none;
+
+    @media screen and (min-width:760px){
+       display: block;
+    }
 }

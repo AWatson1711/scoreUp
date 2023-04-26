@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signIn, updateUser } from "../../redux/reducers/user.slice";
 import mc from "./login.module.scss";
+import manette from "../../assets/img/manette.png";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -30,28 +31,39 @@ const Login = () => {
 
   return (
     <div className={`${mc.container}`}>
-      <h2 className={`tac ${mc.title}`}>Score Up</h2>
+      <div className={`container ${mc.formContainer}`}>
+        <form onSubmit={handleSignIn}>
+          <h2 className={` ${mc.title}`}>Se connecter</h2>
+          <h3 className={mc.subTitle}>Bienvenue !</h3>
 
-      <form onSubmit={handleSignIn}>
-        <h3 className={mc.subTitle}>Login</h3>
+          <fieldset>
+            <legend>Email</legend>
+            <input
+              type="email"
+              value={email}
+              placeholder="Adresse e-mail*"
+              onChange={(e) => handleUpdateUser("email", e.target.value)}
+            />
+          </fieldset>
 
-        <input
-          type="email"
-          value={email}
-          placeholder="Adresse e-mail*"
-          onChange={(e) => handleUpdateUser("email", e.target.value)}
-        />
+          <fieldset>
+            <legend>Mot de passe</legend>
+            <input
+              type="password"
+              value={password}
+              placeholder="Mot de passe*"
+              onChange={(e) => handleUpdateUser("password", e.target.value)}
+            />
+          </fieldset>
 
-        <input
-          type="password"
-          value={password}
-          placeholder="Mot de passe*"
-          onChange={(e) => handleUpdateUser("password", e.target.value)}
-        />
-        <button type="submit" className={mc.btnSignIn}>
-          Sign up
-        </button>
-      </form>
+          <button type="submit" className={mc.btnSignIn}>
+            Log in
+          </button>
+        </form>
+        <div className={mc.imageContainer}>
+          <img src={manette} alt="Image de manette" />
+        </div>
+      </div>
     </div>
   );
 };

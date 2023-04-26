@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
+import mc from "./friends.module.scss";
 import {
   createFriend,
   getFriends,
@@ -35,35 +36,47 @@ const Friends = () => {
   };
   return (
     <div>
-      {friends.map((friend) => {
-        return (
-          <NavLink to={`/friends/${friend.id}`}>
-            <article key={friend.id}>
-              <h3>{friend.name}</h3>
-              <p>{friend.email}</p>
-            </article>
-          </NavLink>
-        );
-      })}
+      {Array.isArray(friends) &&
+        friends.map((friend) => {
+          return (
+            <NavLink to={`/friends/${friend.id}`}>
+              <article key={friend.id} className={mc.friendContainer}>
+                <img src="" alt="avatar de l'ami" />
+                <div className={mc.friendInfos}>
+                  <h3>{friend.name}</h3>
+                  <p>{friend.email}</p>
+                </div>
+              </article>
+            </NavLink>
+          );
+        })}
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="game"
-          id="game"
-          value={name}
-          placeholder="Name"
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          id="email"
-          value={email}
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <fieldset>
+          <legend>Name</legend>
+          <input
+            type="text"
+            name="game"
+            id="game"
+            value={name}
+            placeholder="Name"
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </fieldset>
+
+        <fieldset>
+          <legend>Email</legend>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            value={email}
+            placeholder="Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </fieldset>
+
         <input type="submit" />
       </form>
     </div>

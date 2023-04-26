@@ -16,22 +16,34 @@ const GamePlayed = () => {
     dispatch(getOneGamePlayed(id, token));
   }, [dispatch, id]);
 
-  const gamePlayed = gamesPlayed.filter((gp) => gp.id == id);
-  console.log(gamePlayed);
   const date = Date.now;
   return (
     <div>
       {loading && <p>Loading...</p>}
-      {gamePlayed && (
-        <div>
-          <img src="" alt="une photo de la partie jouer" />
-          <h1>{gamePlayed.game_name}</h1>
-          <h4>{gamePlayed.comment}</h4>
-          <p>{date}</p>
-
-          {/* Afficher les autres détails du jeu ici */}
-        </div>
-      )}
+      {Array.isArray(gamesPlayed) &&
+        gamesPlayed.map((gamePlayed) => {
+          return (
+            <div key={gamePlayed.id} className={mc.gamePlayedContainer}>
+              <img src="" alt="une photo de la partie jouer" />
+              <h1>{gamePlayed.game_name}</h1>
+              <h4>{gamePlayed.comment}</h4>
+              <p>{date}</p>
+              {Array.isArray(gamePlayed.Stats) &&
+                gamePlayed.Stats.map((stat) => {
+                  return (
+                    <ul key={stat.id} className={mc.statContainer}>
+                      <li>
+                        {!!stat.victory === true ? "Victoire" : "Défaite"}
+                      </li>
+                      <li>{stat.score}</li>
+                      <li>{stat.user_id}</li>
+                    </ul>
+                  );
+                })}
+              {/* Afficher les autres détails du jeu ici */}
+            </div>
+          );
+        })}
     </div>
   );
 };

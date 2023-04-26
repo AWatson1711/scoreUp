@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getRequest, postRequest, putRequest } from "../../api/api";
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+  putRequest,
+} from "../../api/api";
 import { getItem } from "../../utils/storage.utils";
 
 const token = getItem("token");
@@ -48,10 +53,11 @@ export const getOneGame = createAsyncThunk(
 
 export const modifyGame = createAsyncThunk(
   "games/modifyGame",
-  async (gameId, thunkApi) => {
+  async ({ gameId, name }, thunkApi) => {
     const { fulfillWithValue, rejectWithValue } = thunkApi;
     const { status, result, error } = await putRequest(
-      `/games/${gameId}`,
+      `/games/update/${gameId}`,
+      { name },
       token,
     );
     return error
@@ -60,10 +66,25 @@ export const modifyGame = createAsyncThunk(
   },
 );
 
+export const deleteGame = createAsyncThunk(
+  "games/deleteGame",
+  async (gameId, thunkApi) => {
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    const { status, result, error } = await deleteRequest(
+      `/games/delete/${gameId}`,
+      token,
+    );
+    return error
+      ? rejectWithValue(`Cannot get game - Error status ${status} - ${error}`)
+      : fulfillWithValue({ result });
+  },
+);
+
 const gameSlice = createSlice({
   name: "games",
   initialState: {
     games: [],
+    game: [],
     name: "",
     loading: false,
     error: null,
@@ -102,8 +123,9 @@ const gameSlice = createSlice({
         return { ...state, loading: true };
       })
       .addCase(getOneGame.fulfilled, (state, action) => {
-        return { ...state, loading: false, games: [...action.payload.games] };
+        return { ...state, loading: false, game: action.payload.games };
       })
+
       .addCase(getOneGame.rejected, (state, action) => {
         return { ...state, loading: false, error: action.payload };
       })
@@ -111,12 +133,30 @@ const gameSlice = createSlice({
         return { ...state, loading: true };
       })
       .addCase(modifyGame.fulfilled, (state, action) => {
-        return { ...state, loading: false, games: action.payload };
+        const { gameId, name } = action.meta.arg;
+        const gameToUpdate = state.games.filter((g) => g.id === gameId);
+        if (gameToUpdate) {
+          return { ...state, loading: false, name: gameToUpdate.name };
+        }
       })
       .addCase(modifyGame.rejected, (state, action) => {
         return { ...state, loading: false, error: action.payload };
       })
       .addCase(modifyGame.pending, (state, action) => {
+        return { ...state, loading: true };
+      })
+      .addCase(deleteGame.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        return {
+          ...state,
+          loading: false,
+          games: state.games.filter((game) => game.id !== id),
+        };
+      })
+      .addCase(deleteGame.rejected, (state, action) => {
+        return { ...state, loading: false, error: action.payload };
+      })
+      .addCase(deleteGame.pending, (state, action) => {
         return { ...state, loading: true };
       });
   },

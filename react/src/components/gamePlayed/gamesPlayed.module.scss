@@ -1,0 +1,19 @@
+.statContainer{
+    border: 1px solid var(--primary-color);
+    display: flex;
+    margin-top: 3rem;
+    & li {
+        margin: 1rem 2rem;
+    }
+}
+
+.gamePlayedContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+
+    & img{
+       margin-top: 5rem; 
+    }
+}

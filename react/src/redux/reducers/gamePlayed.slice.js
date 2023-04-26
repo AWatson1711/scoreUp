@@ -84,11 +84,10 @@ const gamePlayedSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getOneGamePlayed.fulfilled, (state, action) => {
-        console.log(action.payload.gamePlayed);
         return {
           ...state,
           loading: false,
-          gamesPlayed: [...action.payload.gamePlayed.Stats],
+          gamesPlayed: action.payload.gamePlayed,
         };
       })
       .addCase(getOneGamePlayed.rejected, (state, action) => {

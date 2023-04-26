@@ -9,7 +9,6 @@ export const updateFriend = async (req, res) => {
     //   return res.status(401).json({ error: "Access Denied" });
     // }
     const friend = await FriendDAO.updateById(friendId, name, email, number);
-
     if (friendId) {
       return res.json({
         message: `Friend ${name} updated successfuly`,
