@@ -23,6 +23,7 @@ export const signIn = async (req, res) => {
       res.status(200).json({
         message: "ok",
         token,
+        user,
       });
     } else {
       res.status(401).json({ message: "login_failed" });

@@ -1,21 +1,30 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getRequest, postRequest, putRequest } from "../../api/api";
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+  putRequest,
+} from "../../api/api";
 import { getItem } from "../../utils/storage.utils";
 
 const token = getItem("token");
 
-export const getFriends = createAsyncThunk("/friends", async (_, thunkApi) => {
-  const { fulfillWithValue, rejectWithValue } = thunkApi;
-  //   const token = getItem("token");
-  const { status, result, error } = await getRequest(`/friends`, token);
-  console.log(result);
-  return error
-    ? rejectWithValue(`Cannot get game - Error status ${status} - ${error}`)
-    : fulfillWithValue(result);
-});
+export const getFriends = createAsyncThunk(
+  "friends/getFriends",
+  async (_, thunkApi) => {
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    //   const token = getItem("token");
+    const { status, result, error } = await getRequest(`/friends`, token);
+    return error
+      ? rejectWithValue(
+          `Cannot get friends - Error status ${status} - ${error}`,
+        )
+      : fulfillWithValue(result);
+  },
+);
 
 export const createFriend = createAsyncThunk(
-  "/friends/create",
+  "friends/create",
   async (form, thunkApi) => {
     const { fulfillWithValue, rejectWithValue } = thunkApi;
     // const token = getItem("token");
@@ -61,6 +70,20 @@ export const modifyFriend = createAsyncThunk(
           `Cannot get friends - Error status ${status} - ${error}`,
         )
       : fulfillWithValue(result);
+  },
+);
+
+export const deleteFriend = createAsyncThunk(
+  "friends/deleteGame",
+  async (friendId, thunkApi) => {
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    const { status, result, error } = await deleteRequest(
+      `/friends/delete/${friendId}`,
+      token,
+    );
+    return error
+      ? rejectWithValue(`Cannot get friend - Error status ${status} - ${error}`)
+      : fulfillWithValue({ result });
   },
 );
 
@@ -142,6 +165,20 @@ const friendSlice = createSlice({
         return { ...state, loading: false, error: action.payload };
       })
       .addCase(modifyFriend.pending, (state, action) => {
+        return { ...state, loading: true };
+      })
+      .addCase(deleteFriend.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        return {
+          ...state,
+          loading: false,
+          friends: state.friends.filter((friend) => friend.id !== id),
+        };
+      })
+      .addCase(deleteFriend.rejected, (state, action) => {
+        return { ...state, loading: false, error: action.payload };
+      })
+      .addCase(deleteFriend.pending, (state, action) => {
         return { ...state, loading: true };
       });
   },

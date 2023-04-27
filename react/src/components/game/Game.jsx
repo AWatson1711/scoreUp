@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import overwatch from "../../assets/img/overwatch.jpg";
 import {
   deleteGame,
   getOneGame,
@@ -14,12 +15,14 @@ import {
 } from "../../redux/reducers/gamePlayed.slice";
 import { getItem } from "../../utils/storage.utils";
 import mc from "./game.module.scss";
+import tft from "../../assets/img/tft_logo.jpg";
 
 const Game = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const token = getItem("token");
   const { loading, game, name } = useSelector((store) => store.games);
+  const navigate = useNavigate();
 
   const { gamesPlayed } = useSelector((store) => store.gamesPlayed);
   const gamePlayed = gamesPlayed.filter((gp) => gp.game_id === game.id);
@@ -47,6 +50,7 @@ const Game = () => {
 
   const handleDeleteGame = () => {
     dispatch(deleteGame(game.id, token));
+    navigate("/games");
   };
 
   const handleEditGame = () => {
@@ -62,7 +66,7 @@ const Game = () => {
       {loading && <p>Loading...</p>}
       {game && (
         <div className={mc.gameContainer}>
-          <img src="" alt="une photo du jeu" />
+          <img src={overwatch} alt="une photo du jeu" />
           <h2 className={mc.title}>{game.name}</h2>
           {gamePlayed.map((gp) => {
             return (
@@ -70,7 +74,7 @@ const Game = () => {
                 <tbody>
                   <tr>
                     <td>
-                      <img src="" alt="liste de jeu" />
+                      <img src={tft} alt="liste de jeu" />
                     </td>
                     <td>25/04/2023</td>
                     <td>{gp.game_name}</td>
@@ -80,7 +84,7 @@ const Game = () => {
               </table>
             );
           })}
-          <div>
+          <div className={mc.btnContainer}>
             <button className={mc.editButton} onClick={handleEditGame}>
               Edit
             </button>

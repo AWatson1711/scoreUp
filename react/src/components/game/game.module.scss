@@ -2,17 +2,20 @@
     max-width: 800px;
     margin: 0 auto;
     padding: 3rem;
+
   }
   
   .gameList {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    height: 50rem;
+    overflow: auto;
   }
   
   .gameCard {
     width: 30rem;
-    margin-bottom: 3rem;
+    margin: 3rem auto;
     border-radius: 1rem;
     box-shadow: 0 3px 6px var(--primary-color);
     transition: box-shadow 0.3s ease-in-out;
@@ -27,17 +30,18 @@
         border-top-right-radius: 1rem;
     }
 
-    & h4 {
-        margin: 2rem 1.5rem;
+    & h3 {
+        margin: 1rem 1.5rem;
         font-size: 2.4rem;
         font-weight: 700;
-        color: #222;
+        color: var(--secondary-color);
     }
 
     & p {
-        margin: 2rem 1.5rem;
+        margin: 0 1.5rem;
+        padding-bottom: 1rem;
         font-size: 1.6rem;
-        color: #555;
+        color: var(--secondary-color);
       }
     }
 
@@ -48,7 +52,7 @@
       z-index: 9999;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      background: var(--bg-color);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -57,20 +61,25 @@
         position: relative;
         z-index: 1;
         max-width: 500px;
-        background: #222;
+        color: var(--bg-color);
+        background: var(--modal-color);
         padding: 30px;
         border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 0 10px var(--bg-color);
         overflow: hidden;
     
         &title {
           font-size: 24px;
           margin-bottom: 20px;
         }
-
+  
         & fieldset{
           margin: 2rem 0;
           border-radius: .5rem;
+  
+          & input{
+            color: var(--bg-color);
+          }
       }
   
       & legend{
@@ -82,20 +91,16 @@
     
         & .cancelButton {
           position: absolute;
-          top: 10px;
-          right: 10px;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: #ccc;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
+            padding: 0;
+            top: .5rem;
+            right: .5rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
     
-          &:hover {
-            background: #999;
-          }
+        
         }
       }
     }
@@ -110,7 +115,7 @@
     margin-top: 5rem;
   }
   & .title{
-    margin: 5rem;
+    margin: 2rem;
   }
 }
 
@@ -132,5 +137,20 @@
     width: calc(100% / 4);
     /* Remplacer le 6 par le nombre de colonnes de votre tableau */
   }
+}
+
+
+.addBtn{
+  position: absolute;
+  right: 4rem;
+  display: block;
+  bottom: 100px;
+}
+
+.btnContainer{
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
 }
 

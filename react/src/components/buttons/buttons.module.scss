@@ -1,6 +1,12 @@
 button{
     all: unset;
-   
+   border: 1px solid var(--primary-color);
+   border-radius: .5rem;
+   padding: 1rem 2rem;
+   cursor: pointer;
+   &:hover{
+    opacity: .5;
+   }
 }
 
 .login{

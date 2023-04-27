@@ -31,17 +31,23 @@ const deleteById = async (userId) => {
   }
 };
 
-const updateById = async (userId, name, firstname, number, email, password) => {
+const updateById = async (id, name, firstname, password, email) => {
+  let result = null;
   try {
-    const user = await User.findByPk(userId);
-    const hash = await bcrypt.hash(password, 10).then((hash) => {
-      user.update({ name, firstname, number, email, password: hash });
-    });
-    return user;
-  } catch (error) {
-    console.error(`User.dao - updateById : ${error.message}`);
+    result = await User.update(
+      {
+        name,
+        firstname,
+        password,
+        email,
+      },
+      { where: { id } },
+    );
+  } catch (e) {
+    console.log(e.message);
   }
-};
+  return result;
+}; 
 
 const readAll = async () => {
   try {

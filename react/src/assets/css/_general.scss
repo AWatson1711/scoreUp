@@ -29,7 +29,8 @@ body{
     font-family: var(--font-family);
     font-size: 1.6rem;
     color: var(--secondary-color);
-    background-color: #010101
+    background-color: var(--bg-color);
+    transition: all .5s;
 }
 
 img{
@@ -60,6 +61,16 @@ input {
 
     &:focus{
         outline: unset;
+    }
+
+    &[type=submit]{
+        border: 1px solid var(--primary-color);
+        border-radius: .5rem;
+        color: var(--bg-color);
+        cursor: pointer;
+        &:hover{
+            opacity: .5;
+        }
     }
   }
 

@@ -10,7 +10,7 @@ import { userProfil } from "../controllers/user/user.findOne.controller.js";
 const initUsersRoutes = (app, sm) => {
   const router = Router();
   router.get("/", sm, jwtMiddleware, readUser);
-  router.get("/profil", jwtMiddleware, sm, userProfil);
+  router.get("/:id", jwtMiddleware, sm, userProfil);
   router.post("/sign-up", sm, signUp);
   router.post("/sign-in", sm, signIn);
   router.delete("/deleteadmin/:id", sm, jwtMiddleware, deleteUser.admin);

@@ -87,7 +87,7 @@ const SignUp = () => {
             <button type="submit" className={mc.btnSignUp}>
               Sign up
             </button>
-            <NavLink to="login">
+            <NavLink to="/login">
               Vous avez déjà un compte ? <span>Log in</span>{" "}
             </NavLink>
           </div>

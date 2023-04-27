@@ -1,5 +1,4 @@
 import { API_URL } from "../constants/api-url.constant";
-import axios from "axios";
 
 const getRequest = async (url, token = null) => {
   const config = {

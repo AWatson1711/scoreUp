@@ -28,9 +28,9 @@ const member = async (req, res) => {
   const userId = parseInt(req.params.id);
   const userID = req.body.userId;
   try {
-    if (userID && userID !== UserDAO.user_id) {
-      return res.status(401).json({ error: "Access Denied" });
-    }
+    // if (userID && userID !== UserDAO.user_id) {
+    //   return res.status(401).json({ error: "Access Denied" });
+    // }
     const user = await UserDAO.deleteById(userId);
     if (user) {
       res.json({

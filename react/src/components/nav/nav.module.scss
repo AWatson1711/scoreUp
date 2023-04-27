@@ -4,6 +4,7 @@
     border-radius: .4rem;
     z-index: 100;
     position: relative;
+    border: none;
 
     & span{
         position: relative;
@@ -14,7 +15,7 @@
         transition: all .2s ease-in-out;
 
 
-        &::before, &::after {
+        &::before, &::after { 
             position: absolute;
             background-color: var(--secondary-color);
             content: '';
@@ -64,11 +65,12 @@
 
         & li{
             padding-top: 2.5rem;
+            
 
             & a {
                 font-size: var(--font-size-big);
                 text-transform: uppercase;
-                color:#333;
+                color: var(--bg-color);
               
             }
         }
@@ -84,6 +86,7 @@
             & li{
                 padding: 0;
                 padding-left: 1.5rem;
+             
 
                 & a {
                     text-transform: capitalize;
@@ -121,10 +124,8 @@
     }
 
 .disconnect{
-    border: 1px solid var(--accent-color);
-    color: var(--secondary-color);
-    background-color: var(--accent-color);
-    border-radius: 5rem;
+    border-top: 1px solid var(--primary-color);
+    color: var(--primary-color);
     padding: 1rem 2rem;
     font-size: var(--font-size-medium);
     &:hover{
@@ -132,4 +133,40 @@
     }
 }
 
+.btnTheme{
+    color:var(--bg-color);
 
+    &.disconnect{
+        position: absolute;
+        display: flex;
+       left: 14rem;
+       top: 4.2rem;
+       color:var(--secondary-color);
+       border: none;
+
+
+    @media screen and (min-width:760px) {
+           position: static;
+    }
+
+    }
+    @media screen and (min-width:1100px) {
+        
+        color: var(--complementary-color);
+
+     
+    }
+
+  
+
+  
+}
+
+.btnContainer{
+
+    @media screen and (min-width:760px) {
+       display: flex;
+       align-items: center;
+ }
+
+}

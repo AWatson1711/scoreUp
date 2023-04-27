@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getGamePlayed } from "../../redux/reducers/gamePlayed.slice";
 import { getItem } from "../../utils/storage.utils";
+import cod from "../../assets/img/cod_logo.jpg";
 
 import mc from "./game.module.scss";
 const GameCard = (props) => {
@@ -23,9 +24,9 @@ const GameCard = (props) => {
   };
 
   return (
-    <div>
+    <div className={mc.gameCardContainer}>
       <article className={mc.gameCard} onClick={handleNavigateToGame}>
-        <img src={game.image} alt={game.name} />
+        <img src={cod} alt={game.name} />
         <h3>{game.name}</h3>
         <p>{gamePlayedCount.length} parties sauvegarder</p>
       </article>

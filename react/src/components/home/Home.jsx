@@ -11,6 +11,7 @@ import { getItem } from "../../utils/storage.utils";
 import { useDispatch, useSelector } from "react-redux";
 import { getGamePlayed } from "../../redux/reducers/gamePlayed.slice";
 import { NavLink } from "react-router-dom";
+import AddGamePlayed from "../gamePlayed/AddGamePlayed";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Home = () => {
                     <tbody>
                       <tr>
                         <td>
-                          <img src="" alt="liste de jeu" />
+                          <img src={valorant} alt="liste de jeu" />
                         </td>
                         <td>{date}</td>
                         <td>{gamePlayed.game_name}</td>
@@ -57,6 +58,7 @@ const Home = () => {
               );
             })}
           </div>
+          <AddGamePlayed />
         </div>
       ) : (
         <>

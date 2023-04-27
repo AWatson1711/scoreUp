@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
+  deleteFriend,
   getOneFriend,
   modifyFriend,
   startLoading,
   updateFriends,
 } from "../../redux/reducers/friends.slice";
+import avatar from "../../assets/img/avatar.jpeg";
 import { getGamePlayed } from "../../redux/reducers/gamePlayed.slice";
 import { getItem } from "../../utils/storage.utils";
 import mc from "./friends.module.scss";
+import tft from "../../assets/img/tft_logo.jpg";
 
 const Friend = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const token = getItem("token");
+  const navigate = useNavigate();
 
   const { loading, friends, name, email } = useSelector(
     (store) => store.friends,
@@ -52,25 +56,34 @@ const Friend = () => {
     setShowModal(false);
   };
 
+  const handleDeleteFriend = () => {
+    dispatch(deleteFriend(friends.id, token));
+    navigate("/friends");
+  };
   return (
-    <div>
+    <div className={`container ${mc.friendBox}`}>
       {loading && <p>Loading...</p>}
       {friends && (
         <div className={mc.friendHeader}>
-          <div className={mc.friendAvatar}>Image Amis</div>
+          <div>
+            <img src={avatar} alt={friends.name} className={mc.friendAvatar} />
+          </div>
           <div>
             <h2>{friends.name}</h2>
             <h4>{friends.email}</h4>
           </div>
         </div>
       )}
-      <button className={mc.editButton} onClick={handleEditGame}>
-        Edit
-      </button>
+      <div className={mc.btnContainer}>
+        <button className={mc.editButton} onClick={handleEditGame}>
+          Edit
+        </button>
+        <button onClick={handleDeleteFriend}>Delete</button>
+      </div>
       {showModal && (
         <div className={mc.modal}>
           <div className={mc.modalContent}>
-            <h2>Edit Friend</h2>
+            <h2>Modifier Ami</h2>
             <form onSubmit={handleSave}>
               <fieldset>
                 <legend>Name</legend>
@@ -100,9 +113,7 @@ const Friend = () => {
                 className={mc.cancelButton}
                 type="button"
                 onClick={handleCloseModal}
-              >
-                Cancel
-              </button>
+              ></button>
             </form>
           </div>
         </div>
@@ -113,7 +124,7 @@ const Friend = () => {
             <tbody>
               <tr>
                 <td>
-                  <img src="" alt="liste de jeu" />
+                  <img src={tft} alt="liste de jeu" />
                 </td>
                 <td>25/04/2023</td>
                 <td>{gp.game_name}</td>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { getOneGamePlayed } from "../../redux/reducers/gamePlayed.slice";
 import { getItem } from "../../utils/storage.utils";
 import mc from "./gamesPlayed.module.scss";
+import valorant from "../../assets/img/valorant_logo.png";
 
 const GamePlayed = () => {
   const { id } = useParams();
@@ -24,7 +25,7 @@ const GamePlayed = () => {
         gamesPlayed.map((gamePlayed) => {
           return (
             <div key={gamePlayed.id} className={mc.gamePlayedContainer}>
-              <img src="" alt="une photo de la partie jouer" />
+              <img src={valorant} alt="une photo de la partie jouer" />
               <h1>{gamePlayed.game_name}</h1>
               <h4>{gamePlayed.comment}</h4>
               <p>{date}</p>

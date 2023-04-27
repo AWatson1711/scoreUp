@@ -20,16 +20,17 @@ export const addFriends = async (req, res) => {
         //   Ici aussi il faut le token pour trouver le userId
         user_id: userId,
       });
-    });
-    res.status(201).json({
-      message: "friend created",
-      name,
-      email,
-      number,
+      res.status(201).json({
+        message: "friend created",
+        name,
+        email,
+        number,
+      });
     });
   } catch (e) {
     console.error(e.message);
     res.json(e.message);
   }
 };
+
 

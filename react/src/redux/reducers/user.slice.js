@@ -1,8 +1,11 @@
-import { getRequest, postRequest } from "../../api/api";
+import {
+  deleteRequest,
+  getRequest,
+  postRequest,
+  putRequest,
+} from "../../api/api";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getItem, setItem } from "../../utils/storage.utils";
-
-
 
 export const signUp = (redirect, form) => async (dispatch, getState) => {
   const loading = getState().user.loading;
@@ -31,14 +34,31 @@ export const signIn = (redirect, form) => async (dispatch, getState) => {
   }
   if (status >= 200 && status < 300) {
     setItem("token", result.token);
+    setItem("userId", result.user.id);
     redirect();
   }
   dispatch(stopLoading());
 };
 
+export const modifyUser = createAsyncThunk(
+  "user/modifyUser",
+  async ({ userId, name, firstname, email, number }, thunkApi) => {
+    const token = getItem("token");
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    const { status, result, error } = await putRequest(
+      `/users/update/${userId}`,
+      { name, firstname, email, number },
+      token,
+    );
+    return error
+      ? rejectWithValue(`Cannot get user - Error status ${status} - ${error}`)
+      : fulfillWithValue(result);
+  },
+);
+
 export const getOneUser = createAsyncThunk(
   "users/getOne",
-  async (_, userId, thunkApi) => {
+  async (userId, thunkApi) => {
     const token = getItem("token");
     const { fulfillWithValue, rejectWithValue } = thunkApi;
     const { status, result, error } = await getRequest(
@@ -51,9 +71,25 @@ export const getOneUser = createAsyncThunk(
   },
 );
 
+export const deleteUser = createAsyncThunk(
+  "users/deleteGame",
+  async (userId, thunkApi) => {
+    const token = getItem("token");
+    const { fulfillWithValue, rejectWithValue } = thunkApi;
+    const { status, result, error } = await deleteRequest(
+      `/users/delete/${userId}`,
+      token,
+    );
+    return error
+      ? rejectWithValue(`Cannot get user - Error status ${status} - ${error}`)
+      : fulfillWithValue({ result });
+  },
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState: {
+    user: [],
     name: "",
     firstname: "",
     email: "",
@@ -77,12 +113,44 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getOneUser.fulfilled, (state, action) => {
-        return { ...state, loading: false };
+        return { ...state, loading: false, user: action.payload.user };
       })
       .addCase(getOneUser.rejected, (state, action) => {
         return { ...state, loading: false, error: action.payload };
       })
       .addCase(getOneUser.pending, (state, action) => {
+        return { ...state, loading: true };
+      })
+      .addCase(modifyUser.fulfilled, (state, action) => {
+        const updatedUser = action.payload.user;
+        const updatedUsers = Array.isArray(state.user)
+          ? state.user.map((u) => (u.id === updatedUser.id ? updatedUser : u))
+          : [];
+        return {
+          ...state,
+          loading: false,
+          user: updatedUsers,
+        };
+      })
+
+      .addCase(modifyUser.rejected, (state, action) => {
+        return { ...state, loading: false, error: action.payload };
+      })
+      .addCase(modifyUser.pending, (state, action) => {
+        return { ...state, loading: true };
+      })
+      .addCase(deleteUser.fulfilled, (state, action) => {
+        const { id } = action.payload;
+        return {
+          ...state,
+          loading: false,
+          user: state.user.filter((user) => user.id !== id),
+        };
+      })
+      .addCase(deleteUser.rejected, (state, action) => {
+        return { ...state, loading: false, error: action.payload };
+      })
+      .addCase(deleteUser.pending, (state, action) => {
         return { ...state, loading: true };
       });
   },
