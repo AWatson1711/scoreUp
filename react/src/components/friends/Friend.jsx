@@ -50,7 +50,13 @@ const Friend = () => {
   const handleSave = (e) => {
     e.preventDefault();
     dispatch(startLoading());
-    dispatch(modifyFriend({ friendId: friends.id, name, email })).then(() => {
+    dispatch(
+      modifyFriend({
+        friendId: friends.id,
+        name: name === "" ? friends.name : name,
+        email: email === "" ? friends.email : name,
+      }),
+    ).then(() => {
       dispatch(getOneFriend(id, token));
     });
     setShowModal(false);

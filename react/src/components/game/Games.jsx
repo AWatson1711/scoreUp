@@ -20,10 +20,6 @@ const Games = () => {
     return <div>Loading...</div>;
   }
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   return (
     <article className={mc.gameListContainer}>
       <h2>My Games</h2>

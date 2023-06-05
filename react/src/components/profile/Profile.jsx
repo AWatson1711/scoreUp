@@ -40,7 +40,13 @@ const Profile = () => {
     e.preventDefault();
     dispatch(startLoading());
     dispatch(
-      modifyUser({ userId: user.id, name, firstname, email, number }),
+      modifyUser({
+        userId: user.id,
+        name: name === "" ? user.name : name,
+        firstname: firstname === "" ? user.firstname : firstname,
+        email: email === "" ? user.email : email,
+        number: number === "" ? user.number : number,
+      }),
     ).then(() => {
       dispatch(getOneUser(user.id, token));
     });

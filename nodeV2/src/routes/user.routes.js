@@ -15,7 +15,7 @@ const initUsersRoutes = (app, sm) => {
   router.post("/sign-in", sm, signIn);
   router.delete("/deleteadmin/:id", sm, jwtMiddleware, deleteUser.admin);
   router.delete("/delete/:id", sm, jwtMiddleware, deleteUser.member);
-  router.put("/update/:id", sm, updateUser);
+  router.put("/update/:id", sm, jwtMiddleware, updateUser);
   app.use("/users", router);
 };
 

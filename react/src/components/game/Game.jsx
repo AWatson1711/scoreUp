@@ -42,7 +42,9 @@ const Game = () => {
   const handleSave = (e) => {
     e.preventDefault();
     dispatch(startLoading());
-    dispatch(modifyGame({ gameId: game.id, name })).then(() => {
+    dispatch(
+      modifyGame({ gameId: game.id, name: name === "" ? game.name : name }),
+    ).then(() => {
       dispatch(getOneGame(id, token));
     });
     setShowModal(false);

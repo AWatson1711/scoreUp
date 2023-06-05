@@ -18,6 +18,7 @@ export const signUp = (redirect, form) => async (dispatch, getState) => {
   }
   if (status >= 200 && status < 300) {
     setItem("token", result.token);
+    console.log(result.token);
     redirect();
   }
   dispatch(stopLoading());

@@ -1,27 +1,40 @@
 import Friend from "../models/Friend.js";
+import User from "../models/User.js";
+import UserFriend from "../models/UserFriend.js";
 
 const create = async (name, email, number, userId) => {
   let result = null;
   try {
-    result = Friend.create(name, email, number);
+    const friend = await Friend.create({
+      name,
+      email,
+      number,
+    });
+    result = friend;
+
+    const user = await User.findByPk(userId);
+    await user.addFriend(friend);
   } catch (error) {
-    console.error(`friend.dao - readAll : ${error.message}`);
+    console.error(`friend.dao - create : ${error.message}`);
   }
   return result;
 };
- 
+
 const findByEmail = async (email) => {
   try {
-    const emailUser = await Friend.findOne({ where: { email: email } });
-    return emailUser;
+    const friendEmail = await Friend.findOne({
+      where: { email: email },
+    });
+    return friendEmail;
   } catch (error) {
-    console.error(`friend.dao - readAll : ${error.message}`);
+    console.error(`friend.dao - findByEmail : ${error.message}`);
   }
 };
 
-const readAll = async (user_id) => {
+const readAll = async (userId) => {
   try {
-    const friends = await Friend.findAll({ where: { user_id } });
+    const user = await User.findByPk(userId);
+    const friends = await user.getFriends();
     return friends;
   } catch (error) {
     console.error(`friend.dao - readAll : ${error.message}`);

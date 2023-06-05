@@ -56,14 +56,6 @@ User.hasMany(Media, {
   sourceKey: "id",
 });
 
-User.hasMany(Friend, {
-  foreignKey: {
-    allowNull: true,
-    name: "user_id",
-  },
-  sourceKey: "id",
-});
-
 User.hasMany(Game, {
   foreignKey: {
     allowNull: true,
@@ -94,5 +86,6 @@ User.belongsTo(Role, {
     name: "role_id",
   },
 });
+
 
 export default User;

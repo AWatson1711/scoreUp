@@ -31,15 +31,20 @@ const deleteById = async (userId) => {
   }
 };
 
-const updateById = async (id, name, firstname, password, email) => {
+const hashPassword = async (password) => {
+  const hash = await bcrypt.hash(password, 10);
+  return hash;
+};
+
+const updateById = async (id, name, firstname, email, number) => {
   let result = null;
   try {
     result = await User.update(
       {
         name,
         firstname,
-        password,
         email,
+        number,
       },
       { where: { id } },
     );
@@ -47,7 +52,7 @@ const updateById = async (id, name, firstname, password, email) => {
     console.log(e.message);
   }
   return result;
-}; 
+};
 
 const readAll = async () => {
   try {
@@ -92,4 +97,5 @@ export const UserDAO = {
   readAll,
   readById,
   getRoleByUserId,
+  hashPassword,
 };

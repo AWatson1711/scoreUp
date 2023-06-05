@@ -7,11 +7,7 @@ import { passwordIsValid } from "../../utils/regex.utils.js";
 
 export const signUp = async (req, res) => {
   try {
-    const password = req.body.password;
-    const email = req.body.email;
-    const name = req.body.name;
-    const number = req.body.number;
-    const firstname = req.body.firstname;
+    const { password, email, name, number, firstname } = req.body;
 
     const user = UserDAO.findByEmail(email).then((element) => {
       if (element) {

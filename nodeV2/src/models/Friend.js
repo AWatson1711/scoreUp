@@ -4,6 +4,8 @@ import Stat from "./Stat.js";
 import Game_played from "./Game_played.js";
 
 import sequelize from "../db/db.js";
+import User from "./User.js";
+
 
 const Friend = sequelize.define(
   "Friend",
